@@ -10,7 +10,7 @@ class By(BaseModel):
 
 class Trigger(BaseModel):
     by: By
-    origin: Union[Literal['UI'], Literal['API']]
+    origin: Union[Literal["UI"], Literal["API"]]
     at: datetime
 
 
@@ -50,8 +50,8 @@ class Diff(BaseModel):
 
 
 class Webhook(BaseModel):
-    action: Union[Literal['CREATE'], Literal['UPDATE'], Literal['DELETE']]
-    resourceType: Union[Literal['run'], Literal['entity'], Literal['blueprint']]
+    action: Union[Literal["CREATE"], Literal["UPDATE"], Literal["DELETE"]]
+    resourceType: Union[Literal["run"], Literal["entity"], Literal["blueprint"]]
     status: str
     trigger: Trigger
     context: Context

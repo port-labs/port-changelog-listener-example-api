@@ -17,12 +17,15 @@ router = APIRouter()
 async def handle_changelog_webhook(webhook: Webhook):
     logger.info(f"Webhook body: {webhook}")
     event = webhook.action
-    resource_type = webhook.resourceType
-    status = webhook.status
-    before = webhook.diff.before
-    after = webhook.diff.after
+    if event != "UPDATE":
+        # Not a healthStatus update event
+        return {"status": 200}
+    entity = webhook.context.entity
+    before = webhook.diff.before.properties["healthStatus"]
+    after = webhook.diff.after.properties["healthStatus"]
+    if before == after:
+        # No change in healthStatus
+        return {"status": 200}
     triggered_by = webhook.trigger.by.userId
-    response = send_message.send_message_to_slack(event, resource_type, status, before, after, triggered_by)
-    return {
-        "status": response
-    }
+    response = send_message.send_message_to_slack(before, after, entity, triggered_by)
+    return {"status": response}
