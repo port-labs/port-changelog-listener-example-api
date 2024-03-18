@@ -2,4 +2,4 @@
 
 This repository is the base for a FastAPI based changelog listener for Port changelog events.
 
-For more information, refer to [Port's documentation](https://docs.getport.io/tutorials/self-service-actions/webhook-actions/changelog-listener)
+For more information, see the [example guide](https://docs.getport.io/create-self-service-experiences/setup-backend/webhook/examples/changelog-listener/) in Port's documentation.
